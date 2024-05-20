@@ -1,7 +1,7 @@
 import express from "express"
 import mongoose from "mongoose";
 import route from "./Routes/route.js"
-import 'dotenv/config'
+import 'dotenv/config';
 
 
 const app = express()
@@ -16,6 +16,9 @@ mongoose.connect(mongoDBurl)
     .catch((err) => console.log('Error connecting with data base', err))
 
 app.use(route)
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/Front-end/index.html')
+})
 
 app.use('/*', (req, res) => {
     res.status(400).json({
