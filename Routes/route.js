@@ -7,7 +7,7 @@ const { createShortUrl, redirectUrl } = modelController;
 const router = express.Router();
 
 router.post('/api/v1/url', createShortUrl);
-router.get('/api/v1/url/:urlId', redirectUrl);
+router.get('/:urlId', redirectUrl);
 
 export default router;
 // module.exports = router;
