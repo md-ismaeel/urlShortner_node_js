@@ -7,11 +7,11 @@ import 'dotenv/config'
 const app = express()
 const port = 10000;
 // const port = process.env.PORT || 10000;
-// const mongoDBurl = process.env.userMongoDb;
+const mongoDBurl = process.env.userMongoDb;
 
 app.use(express.json())
 
-mongoose.connect('mongodb+srv://ismail:PpgMCDcWlo3LCyl1@cluster0.rs6nm8w.mongodb.net/')
+mongoose.connect(mongoDBurl)
     .then(() => console.log('connection with data base stablish successfully'))
     .catch((err) => console.log('Error connecting with data base', err))
 
