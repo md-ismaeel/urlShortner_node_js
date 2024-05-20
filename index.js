@@ -1,6 +1,8 @@
 import express from "express"
 import mongoose from "mongoose";
 import route from "./Routes/route.js"
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import 'dotenv/config';
 
 
@@ -9,6 +11,9 @@ const port = 10000;
 // const port = process.env.PORT || 10000;
 const mongoDBurl = process.env.userMongoDb;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 app.use(express.json())
 
 mongoose.connect(mongoDBurl)
@@ -16,7 +21,10 @@ mongoose.connect(mongoDBurl)
     .catch((err) => console.log('Error connecting with data base', err))
 
 app.use(route)
+
+
 app.get('/', (req, res) => {
+    console.log(__dirname);
     res.sendFile(__dirname + '/Front-end/index.html')
 })
 
