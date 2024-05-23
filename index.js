@@ -24,10 +24,22 @@ mongoose.connect(mongoDBurl)
 
 app.use(route)
 
+// app.use(express.static("Front-end"))
+// express.static('Front-end')
+// app.get('/index.js', (req, res) => {
+//     console.log('anything');
+//     res.sendFile(__dirname + "/Front-end/index.js")
+// })
+
+// app.get('/index.css', (req, res) => {
+//     res.sendFile(__dirname + "/Front-end/index.css")
+
+// })
 
 app.get('/', (req, res) => {
-    console.log(__dirname);
+    // console.log(__dirname);
     res.sendFile(__dirname + '/Front-end/index.html')
+    // res.send('Front-end')
 })
 
 app.use('/*', (req, res) => {

@@ -5,6 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./index.css" />
     <title>Shorten url</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      #shorten-btn {
+        height: 2.5rem;
+        width: 6rem;
+        background-color: blue;
+        color: white;
+        border: 0;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      #inputVal {
+        width: 40rem;
+        height: 2.5rem;
+        padding: 0rem 1rem;
+        font-size: 18px;
+      }
+
+      #readonly {
+        width: 46rem;
+        height: 2.5rem;
+        font-size: 18px;
+        padding: 0rem 1rem;
+      }
+    </style>
   </head>
   <body>
     <main class="container">
@@ -17,6 +58,39 @@
       </div>
     </main>
 
-    <script src="./index.js" />
+    <!-- <script src="./index.js" /> -->
+    <script>
+      const input = document.getElementById("inputVal");
+      const readonly = document.getElementById("readonly");
+      const shortner = document.getElementById("shorten-btn");
+
+      const url = `https://urlshortner-y1na.onrender.com/api/v1/url`;
+
+      const fetchData = async () => {
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ longUrl: input.value }),
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          // console.log(response);
+          console.log(data);
+          readonly.value = data.url;
+          input.value = "";
+        } catch (err) {
+          console.error("Fetch data failed", err);
+        }
+      };
+
+      // fetchData(url)
+      shortner.addEventListener("click", fetchData);
+    </script>
   </body>
 </html>
