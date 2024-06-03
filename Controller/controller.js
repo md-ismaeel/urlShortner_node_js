@@ -15,6 +15,7 @@ const createShortUrl = async (req, res) => {
 
     try {
         const { longUrl } = req.body;
+        //long url
         const shortedUrl = `http://${req.headers.host}/${nanoid(8)}`;
 
         if (!isUrlValid(longUrl)) {
